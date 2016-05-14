@@ -11,6 +11,7 @@ addons:
     packages:
     - g++-4.8
 before_deploy:
+  - npm run build -- --release
   - rm -rf package.json tools test src docs
   - mv build/* ./
   - rm -rf build
