@@ -12,6 +12,7 @@ addons:
     - g++-4.8
 before_deploy:
   - "npm run build -- --release"
+  - "ls"
   - "cd build"
 deploy:
   provider: heroku
