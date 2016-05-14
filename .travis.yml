@@ -10,12 +10,20 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-before_deploy:
+# before_deploy:
+#   - npm run build -- --release
+#   - rm -rf package.json tools test src docs
+#   - mv build/* ./
+#   - rm -rf build
+#   - ls
+after_success:
   - npm run build -- --release
-  - rm -rf package.json tools test src docs
-  - mv build/* ./
-  - rm -rf build
-  - ls
+  - cd build
+  - git init
+  - git config --global user.email "travis@localhost.localdomain"
+  - git config --global user.name "Travis CI"
+  - git add --all
+  - git commit -am "Travis change"
 deploy:
   provider: heroku
   api_key:
